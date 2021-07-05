@@ -1,45 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { MdFlightTakeoff } from 'react-icons/md'
-import api from '../../services/api'
-import './home.css'
+import { MdFlightTakeoff } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
-function Home() {
+import api from '../../services/api';
+import './home.css';
+
+export default function Home() {
   const [trips, setTrips] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+
     async function loadApi() {
-      const response = await api.get('trips')
-      setTrips(response.data)
-      console.log(response.data)
+      const response = await api.get('trips');
+      setTrips(response.data);
     }
 
-    loadApi()
+    loadApi();
 
-  }, [])
+  }, []);
 
+  function handleAdd(trip){
+    
+  }
 
   return (
-    <div>
-      <div className="box">
-        {trips.map(trip => (
-          <li key={trip.id}>
-            <img src={trip.image} alt={trip.title} />
-            <strong>{trip.title}</strong>
-            <span> Status: {trip.status ? 'Disponível' : 'Indisponível'}</span>
-            <button
-              type="button"
-              onClick={() => {}}
-            >
-              <div>
-                <MdFlightTakeoff size={16} color="#fff" />
-              </div>
-              <span>Solicitar Reserva</span>
-            </button>
-          </li>
-        ))}
-      </div>
+    <div className="box">
+      {trips.map(trip => (
+        <li key={trip.id}>
+          <img src={trip.image} alt={trip.title} />
+          <strong>{trip.title}</strong>
+          <span>Status: {trip.status ? 'Disponivel' : 'Indisponivel'}</span>
+
+          <button
+            type="button"
+            onClick={() => handleAdd(trip)}
+          >
+            <div>
+              <MdFlightTakeoff size={16} color="#FFF" />
+            </div>
+            <span>SOLICITAR RESERVA</span>
+          </button>
+        </li>
+      ))}
     </div>
   );
 }
-
-export default Home;
