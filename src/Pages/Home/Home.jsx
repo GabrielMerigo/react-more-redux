@@ -21,7 +21,10 @@ export default function Home() {
   }, []);
 
   function handleAdd(trip){
-    
+    dispatch({
+      type: 'ADD_RESERVE',
+      trip
+    })
   }
 
   return (
