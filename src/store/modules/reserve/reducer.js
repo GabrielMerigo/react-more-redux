@@ -6,9 +6,6 @@ export default function reserve(state = [], action){
     case 'ADD_RESERVE_SUCCESS':
       return produce(state, draft => {
         draft.push(action.trip)
-
-        
-
       })
     case 'REMOVE_RESERVE': 
       return produce(state, draft => {
